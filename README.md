@@ -20,7 +20,8 @@
 - 🔜 **Coming soon**: Hero 11-13 support, GyroFlow integration, ML analytics
 
 📖 **Documentation**: [pygpmf-oz.readthedocs.io](https://pygpmf-oz.readthedocs.io/)  
-📋 **Full roadmap**: [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md)
+📋 **Full roadmap**: [docs/development/DEVELOPMENT_ROADMAP.md](docs/development/DEVELOPMENT_ROADMAP.md)  
+📚 **All Documentation**: [docs/](docs/)
 
 ---
 

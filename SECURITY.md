@@ -183,10 +183,10 @@ pip-audit
 
 ## 🔐 Current Secrets in This Project / Текущие секреты в проекте
 
-| Secret Name | Purpose | Where to Get | Rotation |
-|-------------|---------|--------------|----------|
+| Secret Name         | Purpose                    | Where to Get                             | Rotation       |
+| ------------------- | -------------------------- | ---------------------------------------- | -------------- |
 | `READTHEDOCS_TOKEN` | Trigger ReadTheDocs builds | https://readthedocs.org/accounts/tokens/ | Every 6 months |
-| `PYPI_API_TOKEN` | ⚠️ Not used (we use OIDC) | https://pypi.org/manage/account/token/ | N/A |
+| `PYPI_API_TOKEN`    | ⚠️ Not used (we use OIDC)   | https://pypi.org/manage/account/token/   | N/A            |
 
 ---
 
@@ -201,10 +201,10 @@ pip-audit
 
 ## 📝 Security Audit Log / Журнал безопасности
 
-| Date | Action | Details |
-|------|--------|---------|
+| Date       | Action                  | Details                                              |
+| ---------- | ----------------------- | ---------------------------------------------------- |
 | 2026-01-12 | Initial security review | Removed exposed ReadTheDocs token from documentation |
-| 2026-01-12 | Added SECURITY.md | Created security policy document |
+| 2026-01-12 | Added SECURITY.md       | Created security policy document                     |
 
 ---
 
