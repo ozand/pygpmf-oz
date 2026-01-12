@@ -18,7 +18,7 @@ if __name__ == "__main__":
         name="pygpmf_oz",
         author="Alexis Mignon",
         author_email="alexis.mignon@gmail.com",
-        description="A module to read GPMF data embedded in GoPro video files. Modernized fork with Python 3.9+ and Windows support.",
+        description="Python library for extracting GPS and sensor telemetry from GoPro videos (Hero 5-13). Supports GPS5/GPS9 (10Hz), gyroscope, accelerometer. Python 3.9-3.13.",
         long_description=README,
         long_description_content_type="text/markdown",
         version=__version__,
@@ -43,6 +43,7 @@ if __name__ == "__main__":
             "Programming Language :: Python :: 3.10",
             "Programming Language :: Python :: 3.11",
             "Programming Language :: Python :: 3.12",
+            "Programming Language :: Python :: 3.13",
             "Operating System :: OS Independent",
         ]
     )
