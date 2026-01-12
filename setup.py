@@ -1,9 +1,17 @@
 from setuptools import setup, find_packages
 import pathlib
-from gpmf import __version__
+import re
 
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text(encoding='utf-8')
+
+# Read version from __init__.py
+init_file = (HERE / "gpmf" / "__init__.py").read_text(encoding='utf-8')
+version_match = re.search(r'__version__\s*=\s*["\']([^"\']+)["\']', init_file)
+if version_match:
+    __version__ = version_match.group(1)
+else:
+    __version__ = "0.2.0"
 
 if __name__ == "__main__":
     setup(
