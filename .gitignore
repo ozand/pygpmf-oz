@@ -49,12 +49,25 @@ cover/
 
 # Environments
 .env
+.env.*
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Security - Never commit these!
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.yml
+secrets.json
+*secret*
+*credential*
+*token*
+.secrets/
 
 # Test data (large files)
 tests/data/*.MP4

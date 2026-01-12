@@ -8,11 +8,11 @@
 ## 📋 Выполненные изменения
 
 ### 1. Репозиторий
-| Параметр | Было | Стало |
-|----------|------|-------|
-| **Owner** | alexis-mignon | ozand |
-| **Repository** | pygpmf | pygpmf |
-| **URL** | github.com/alexis-mignon/pygpmf | github.com/ozand/pygpmf |
+| Параметр       | Было                            | Стало                   |
+| -------------- | ------------------------------- | ----------------------- |
+| **Owner**      | alexis-mignon                   | ozand                   |
+| **Repository** | pygpmf                          | pygpmf                  |
+| **URL**        | github.com/alexis-mignon/pygpmf | github.com/ozand/pygpmf |
 
 ### 2. Метаданные пакета (setup.cfg)
 
@@ -123,7 +123,10 @@ Python 3.9-3.13, совместимость с Windows, активная под�
 
 **Секрет для добавления**:
 - **Name**: `READTHEDOCS_TOKEN`
-- **Value**: `158f9d3d489fea0cee0dd26eba0482547a217e36`
+- **Value**: `<YOUR_READTHEDOCS_API_TOKEN>`
+
+⚠️ **Важно**: Получите токен в настройках ReadTheDocs:  
+https://readthedocs.org/accounts/tokens/
 
 **Инструкции**: См. [READTHEDOCS_SETUP.md](READTHEDOCS_SETUP.md)
 
@@ -162,14 +165,14 @@ url = https://github.com/ozand/pygpmf
 
 ## 📊 Сравнение метаданных
 
-| Поле | PyPI v0.2.1 (старое) | PyPI v0.3.0 (новое) |
-|------|----------------------|---------------------|
-| **Name** | pygpmf_oz | pygpmf_oz |
-| **Version** | 0.2.1 | 0.3.0 |
-| **Author** | Alexis Mignon | ozand |
-| **Maintainer** | - | ozand |
-| **Repository** | alexis-mignon/pygpmf | ozand/pygpmf |
-| **Original Project** | - | alexis-mignon/pygpmf |
+| Поле                 | PyPI v0.2.1 (старое) | PyPI v0.3.0 (новое)  |
+| -------------------- | -------------------- | -------------------- |
+| **Name**             | pygpmf_oz            | pygpmf_oz            |
+| **Version**          | 0.2.1                | 0.3.0                |
+| **Author**           | Alexis Mignon        | ozand                |
+| **Maintainer**       | -                    | ozand                |
+| **Repository**       | alexis-mignon/pygpmf | ozand/pygpmf         |
+| **Original Project** | -                    | alexis-mignon/pygpmf |
 
 ---
 

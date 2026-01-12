@@ -1,6 +1,19 @@
 # ReadTheDocs Integration Setup
 
-**API Key**: `158f9d3d489fea0cee0dd26eba0482547a217e36`
+⚠️ **Security Note**: The ReadTheDocs API token is stored securely in GitHub Secrets.  
+Never commit the actual token to the repository.
+
+---
+
+## 🔐 Getting Your ReadTheDocs API Token
+
+1. Log in to ReadTheDocs: **https://readthedocs.org/**
+2. Go to your profile settings: **https://readthedocs.org/accounts/tokens/**
+3. Click: **Create Token**
+4. Give it a description (e.g., "GitHub Actions CI/CD")
+5. Copy the generated token (you won't see it again!)
+
+⚠️ **Keep this token private!** Never commit it to your repository.
 
 ---
 
@@ -13,7 +26,7 @@
 3. Click: **New repository secret**
 4. Fill in:
    - **Name**: `READTHEDOCS_TOKEN`
-   - **Secret**: `158f9d3d489fea0cee0dd26eba0482547a217e36`
+   - **Secret**: Paste your token from ReadTheDocs
 5. Click: **Add secret**
 
 ✅ **Done!** The API key is now securely stored.
@@ -88,8 +101,9 @@ After pushing a release tag, verify:
 
 **Fix**:
 1. Verify secret name is exactly: `READTHEDOCS_TOKEN`
-2. Verify secret value matches: `158f9d3d489fea0cee0dd26eba0482547a217e36`
-3. Re-save the secret if needed
+2. Verify secret value is your actual ReadTheDocs API token
+3. Get token from: https://readthedocs.org/accounts/tokens/
+4. Re-save the secret if needed
 
 ### Issue: "404 Not Found"
 
