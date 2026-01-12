@@ -114,10 +114,21 @@ def iter_klv(x):
     start = 0
 
     while start < len(x):
+        if start + 8 > len(x):
+            # Incomplete header; stop parsing to avoid struct errors
+            break
+
         head = struct.unpack(">cccccBH", x[start: start + 8])
-        fourcc = (b"".join(head[:4])).decode()
+
+        # Decode FourCC defensively (FourCC is binary; avoid Unicode errors)
+        fourcc_bytes = b"".join(head[:4])
+        try:
+            fourcc = fourcc_bytes.decode("ascii")
+        except UnicodeDecodeError:
+            fourcc = fourcc_bytes.decode("latin-1", errors="replace")
+
         type_str, size, repeat = head[4:]
-        type_str = type_str.decode()
+        type_str = type_str.decode(errors="replace")
         start += 8
         payload_size = ceil4(size * repeat)
         payload = parse_payload(x[start: start + payload_size], fourcc, type_str, size, repeat)

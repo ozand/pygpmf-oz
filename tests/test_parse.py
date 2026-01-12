@@ -101,6 +101,25 @@ class TestPayloadParsing:
         result = parse.parse_payload(values, 'TEST', 'f', 4, 3)
         assert result is not None
 
+class TestIterKLVRobustness:
+    def test_iter_klv_non_ascii_fourcc(self):
+        # FourCC contains non-ASCII bytes; should not raise during decoding
+        header = struct.pack(
+            '>cccccBH',
+            b'\xff', b'\xfe', b'\xfd', b'\xfc',
+            b'c',  # type
+            0,     # size
+            0      # repeat
+        )
+        stream = header  # no payload
+
+        items = list(parse.iter_klv(stream))
+
+        # Should produce exactly one item with 4-char key string
+        assert len(items) == 1
+        assert isinstance(items[0].key, str)
+        assert len(items[0].key) == 4
+
 
 class TestStreamParsing:
     """Test GPMF stream parsing."""
