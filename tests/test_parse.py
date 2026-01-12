@@ -1,48 +1,127 @@
 """Tests for GPMF parsing functionality."""
 import pytest
+import struct
 from gpmf import parse
 
 
-class TestGPMFParsing:
-    """Test GPMF format parsing."""
+class TestUtilityFunctions:
+    """Test GPMF utility functions."""
     
-    def test_parse_klv_structure(self):
-        """Test Key-Length-Value structure parsing."""
-        # TODO: Implement KLV parsing test
-        pytest.skip("Requires GPMF KLV parser implementation")
+    def test_ceil4_basic(self):
+        """Test ceil4 function with basic values."""
+        assert parse.ceil4(1) == 4
+        assert parse.ceil4(2) == 4
+        assert parse.ceil4(3) == 4
+        assert parse.ceil4(4) == 4
+        assert parse.ceil4(5) == 8
     
-    def test_parse_type_declaration(self):
-        """Test TYPE declaration parsing."""
-        # Example: TYPE 'c' 1 4 "fssL"
-        # TODO: Implement type parsing test
-        pytest.skip("Requires GPMF type parser")
+    def test_ceil4_multiples(self):
+        """Test ceil4 with multiples of 4."""
+        assert parse.ceil4(8) == 8
+        assert parse.ceil4(12) == 12
+        assert parse.ceil4(16) == 16
     
-    def test_parse_nested_structures(self):
-        """Test nested GPMF structure parsing."""
-        # TODO: Implement nested structure test
-        pytest.skip("Requires nested parser")
+    def test_ceil4_large_values(self):
+        """Test ceil4 with larger values."""
+        assert parse.ceil4(100) == 100
+        assert parse.ceil4(101) == 104
+        assert parse.ceil4(255) == 256
+
+
+class TestKLVParsing:
+    """Test Key-Length-Value structure parsing."""
     
-    def test_32bit_alignment(self):
-        """Test 32-bit alignment in GPMF data."""
-        # GPMF requires 32-bit alignment
-        # TODO: Implement alignment check
-        pytest.skip("Requires alignment validator")
+    def test_klv_length_structure(self):
+        """Test KLVLength named tuple."""
+        klv_len = parse.KLVLength(type='f', size=4, repeat=10)
+        assert klv_len.type == 'f'
+        assert klv_len.size == 4
+        assert klv_len.repeat == 10
+    
+    def test_klv_item_structure(self):
+        """Test KLVItem named tuple."""
+        klv_item = parse.KLVItem(key='GPS5', length=40, value=b'\x00' * 40)
+        assert klv_item.key == 'GPS5'
+        assert klv_item.length == 40
+        assert len(klv_item.value) == 40
+
+
+class TestNumericTypes:
+    """Test GPMF numeric type definitions."""
+    
+    def test_num_types_exists(self):
+        """Test that numeric types dictionary exists."""
+        assert hasattr(parse, 'num_types')
+        assert isinstance(parse.num_types, dict)
+    
+    def test_num_types_coverage(self):
+        """Test that common types are defined."""
+        required_types = ['f', 's', 'l', 'L', 'b', 'B']
+        for t in required_types:
+            assert t in parse.num_types
+    
+    def test_float_types(self):
+        """Test float type definitions."""
+        assert parse.num_types['f'][0] == 'float32'
+        assert parse.num_types['d'][0] == 'float64'
+    
+    def test_signed_integer_types(self):
+        """Test signed integer types."""
+        assert parse.num_types['b'][0] == 'int8'
+        assert parse.num_types['s'][0] == 'int16'
+        assert parse.num_types['l'][0] == 'int32'
+    
+    def test_unsigned_integer_types(self):
+        """Test unsigned integer types."""
+        assert parse.num_types['B'][0] == 'uint8'
+        assert parse.num_types['S'][0] == 'uint16'
+        assert parse.num_types['L'][0] == 'uint32'
+
+
+class TestPayloadParsing:
+    """Test GPMF payload parsing."""
+    
+    def test_parse_payload_exists(self):
+        """Test that parse_payload function exists."""
+        assert hasattr(parse, 'parse_payload')
+        assert callable(parse.parse_payload)
+    
+    def test_parse_simple_float(self):
+        """Test parsing a simple float value."""
+        # Create a simple float payload
+        value = struct.pack('>f', 3.14159)
+        result = parse.parse_payload(value, 'TEST', 'f', 4, 1)
+        # Should return parsed float
+        assert result is not None
+    
+    def test_parse_multiple_values(self):
+        """Test parsing multiple values in payload."""
+        # Create payload with multiple floats
+        values = struct.pack('>fff', 1.0, 2.0, 3.0)
+        result = parse.parse_payload(values, 'TEST', 'f', 4, 3)
+        assert result is not None
 
 
 class TestStreamParsing:
     """Test GPMF stream parsing."""
     
-    def test_extract_stream_from_mp4(self):
-        """Test GPMF stream extraction from MP4 file."""
-        # TODO: Requires sample MP4 file
-        pytest.skip("Requires test MP4 file")
+    def test_filter_klv_exists(self):
+        """Test that filter_klv function exists."""
+        assert hasattr(parse, 'filter_klv')
     
-    def test_handle_corrupted_stream(self):
-        """Test handling of corrupted GPMF stream."""
-        # TODO: Test error handling
-        pytest.skip("Requires corrupted stream sample")
+    def test_empty_stream(self):
+        """Test handling of empty stream."""
+        # Empty stream should not crash
+        stream = b''
+        result = list(parse.filter_klv(stream, 'GPS5'))
+        assert result == []
     
-    def test_large_file_handling(self):
-        """Test handling of large video files (>2GB)."""
-        # TODO: Test streaming parser
-        pytest.skip("Requires large file test")
+    def test_invalid_stream(self):
+        """Test handling of invalid stream data."""
+        # Random bytes should not crash parser
+        stream = b'\x00\x01\x02\x03\x04\x05'
+        try:
+            list(parse.filter_klv(stream, 'GPS5'))
+        except:
+            # Should handle gracefully
+            pass

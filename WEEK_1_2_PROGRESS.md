@@ -55,15 +55,15 @@ Coverage: 17.01%
 
 ## 📈 Week 1-2 Progress
 
-| Task | Status | Completion |
-|------|--------|------------|
-| Unit tests | ✅ DONE | 100% |
-| GitHub Actions CI | ✅ DONE | 100% |
-| Example scripts (3+) | ✅ DONE | 100% |
-| Issue templates | ✅ DONE | 100% |
-| Code coverage 80% | 🔄 IN PROGRESS | 17% |
-| Sphinx docs | 🔲 TODO | 0% |
-| API reference | 🔲 TODO | 0% |
+| Task                 | Status        | Completion |
+| -------------------- | ------------- | ---------- |
+| Unit tests           | ✅ DONE        | 100%       |
+| GitHub Actions CI    | ✅ DONE        | 100%       |
+| Example scripts (3+) | ✅ DONE        | 100%       |
+| Issue templates      | ✅ DONE        | 100%       |
+| Code coverage 80%    | 🔄 IN PROGRESS | 17%        |
+| Sphinx docs          | 🔲 TODO        | 0%         |
+| API reference        | 🔲 TODO        | 0%         |
 
 **Overall**: 60% complete in 1 day! 🚀
 
